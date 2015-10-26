@@ -65,7 +65,7 @@ int parseCommandLineOptions(int argc, char *argv[]){
          */
         inputFile = argv[optind];
         for(index = optind; index < argc; index++) {
-                printf("Non-option argument %s\n", argv[index]);
+                printf("Non-option argument %s\n\n", argv[index]);
         }
         return 0;
 }

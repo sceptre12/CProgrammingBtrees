@@ -111,7 +111,26 @@ int greaterThan(char stringA[],char stringB[],int caseType){
                         }
                 }
         }
-        // Case checking matters
-
+        if(lengthB < lengthA ) {
+                for(count = 0; count < lengthB; count++) {
+                        if(tempA[count] != tempB[count]) {
+                                if(tempA[count] > tempB[count]) {
+                                        return 1;
+                                }else{
+                                        return 0;
+                                }
+                        }
+                }
+        }else {
+                for(count = 0; count < lengthA; count++) {
+                        if(tempA[count] != tempB[count]) {
+                                if(tempA[count] > tempB[count]) {
+                                        return 1;
+                                }else{
+                                        return 0;
+                                }
+                        }
+                }
+        }
         return 0;
 }

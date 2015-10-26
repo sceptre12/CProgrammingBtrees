@@ -4,6 +4,15 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+// Struct Declartions
+struct Node{
+    char *currLine;
+    int duplicate;
+    struct Node *left;
+    struct Node *parent;
+    struct Node *right;
+};
+
 
 //##########Function Declarations
 
@@ -21,3 +30,7 @@ int parseCommandLineOptions(int argc, char *argv[]);
 void determineRead(char *fileName);
 void readFile(char *fileName);
 void readFromInput();
+
+//BinarySort
+void binarySort(char **array, int length);
+int insertNode(struct Node *root,char *line);
