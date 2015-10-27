@@ -9,9 +9,9 @@ extern char *sortedList[];
 // TODO: Place the creation of a struct in a function
 
 int binarySort(char **array, int length){
-        printf("\tEntering Binary Sort\n");
+        // printf("\tEntering Binary Sort\n");
 
-
+        // creates root Node
         struct Node root;
         root.currLine = array[0];
         root.left = NULL;
@@ -19,27 +19,21 @@ int binarySort(char **array, int length){
         root.duplicate = 0;
 
         // Outputs String Array
-        int a;
-        for (a  = 0; a < length; a++) {
-                printf("%s\n",array[a]);
-        }
+
         // struct Node *start = &root;
         //Creating binary Tree
+        int a;
         for(a = 1; a < length; a++) {
                 insertNode(&root,array[a]);
         }
         // Prints out the sorted values from the tree
         printInOrder(&root);
-
-        for(a = 0; a < length; a++) {
-                printf("Index: %d '%s'\n", a,sortedList[a]);
-        }
-        printf("\tLeaving Binary Sort\n");
+        // printf("\tLeaving Binary Sort\n");
         return length;
 }
 
 int insertNode(struct Node *root, char *stringB){
-        printf("Entering Insert Node Function\n");
+        // printf("Entering Insert Node Function\n");
         // printf("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         // printf("Current string being inserted CaseType: %d\nString A: '%s'\nString B: '%s'\n\n", shouldBeCaseSensitive, root->currLine,stringB);
         // printf("Duplicate number '%d'\n", root->duplicate);
@@ -77,7 +71,7 @@ int insertNode(struct Node *root, char *stringB){
                         tempNode->duplicate = 0;
                         root->left = tempNode;
                         // printf("\tAdding to LEFTNODE: '%s'\n", root->left->currLine);
-                        printf("Leaving Insert Node Function\n");
+                        // printf("Leaving Insert Node Function\n");
                         return 0;
                 }
         }else if (greaterThanResult == 0) {
@@ -106,11 +100,11 @@ int insertNode(struct Node *root, char *stringB){
                         tempNode->duplicate = 0;
                         root->right = tempNode;
                         // printf("\tAdding to RIGHTNODE: '%s'\n", root->right->currLine);
-                        printf("Leaving Insert Node Function\n");
+                        // printf("Leaving Insert Node Function\n");
                         return 0;
                 }
         }
-        printf("Leaving Insert Node Function\n");
+        // printf("Leaving Insert Node Function\n");
         return 0;
 }
 
@@ -123,8 +117,9 @@ void printInOrder(struct Node *root){
                 // printf("Printing Out left\n");
                 printInOrder(root->left);
 
-                char *someString = root->currLine;
+                char *someString = root->currLine;                
                 // stores the values inside of this global array
+
                 sortedList[index] = someString;
                 index++;
                 // printf("Printing out right\n");

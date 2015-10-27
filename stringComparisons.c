@@ -106,7 +106,7 @@ int greaterThan(char stringA[],char stringB[],int caseType){
                                 }
                         }
                 }else {
-                    printf("Inside of String comparison Less Than\n");
+                    // printf("Inside of String comparison Less Than\n");
                         for(count = 0; count < lengthA; count++) {
                                 if(tempA[count] != tempB[count]) {
                                         if(tempA[count] > tempB[count]) {

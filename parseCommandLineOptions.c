@@ -5,11 +5,8 @@ extern int shouldBeCaseSensitive;
 extern char *outputFile;
 extern char *inputFile;
 int parseCommandLineOptions(int argc, char *argv[]){
-        printf("Inside of Reading Command line\n");
 
-        int cflag = 0;
-        char *ovalue= NULL;
-        int index, c;
+        int c;
 
         /*
            opterr: If the value of this variable is nonzero then getopts prints an error message
@@ -23,7 +20,6 @@ int parseCommandLineOptions(int argc, char *argv[]){
         while((c = getopt(argc,argv, "co:")) != -1) {
                 switch(c) {
                 case 'c':
-                        cflag= 1;
                         shouldBeCaseSensitive = 1;
                         break;
                 case 'o':
@@ -31,7 +27,6 @@ int parseCommandLineOptions(int argc, char *argv[]){
                            optarg: This variable is set by getopt to point at the value of the
                            option argument, for those that accept arguments
                          */
-                        ovalue = optarg;
                         outputFile = optarg;
                         break;
                 case '?':
@@ -56,7 +51,6 @@ int parseCommandLineOptions(int argc, char *argv[]){
                         abort();
                 }
         }
-        printf ("cflag = %d, coalue = %s\n",cflag,ovalue);
 
         /*
            optind: Is set by the getopts to the index of next element of the argv array
@@ -64,8 +58,8 @@ int parseCommandLineOptions(int argc, char *argv[]){
                   this can be used to determien where all the non-opion arguments begin.
          */
         inputFile = argv[optind];
-        for(index = optind; index < argc; index++) {
-                printf("Non-option argument %s\n\n", argv[index]);
-        }
+        // for(index = optind; index < argc; index++) {
+        //         printf("Non-option argument %s\n\n", argv[index]);
+        // }
         return 0;
 }

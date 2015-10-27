@@ -5,11 +5,11 @@
 #include <stdlib.h>
 
 // Struct Declartions
-struct Node{
-    char *currLine;
-    int duplicate;
-    struct Node *left;
-    struct Node *right;
+struct Node {
+        char *currLine;
+        int duplicate;
+        struct Node *left;
+        struct Node *right;
 };
 
 
@@ -29,6 +29,11 @@ int parseCommandLineOptions(int argc, char *argv[]);
 int determineRead(char *fileName);
 int readFile(char *fileName);
 int readFromInput();
+
+//WriteFile Function
+void determineOutput(char *fileName, int sortedListSize);
+void writeToOutputFile(char *fileName, int sortedListSize);
+void writeToScreen(int sortedListSize);
 
 //BinarySort
 int binarySort(char **array, int length);

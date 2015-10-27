@@ -8,7 +8,9 @@
 
 //Determines the case type
 extern int shouldBeCaseSensitive;
-
+extern char *lineBuffer;
+extern char **lineStorage;
+extern int lineStorageSize;
 
 int readFile(char *fileName){
         // filePath Location
@@ -35,18 +37,18 @@ int readFile(char *fileName){
            Malloc allocates a memory block of a specific size
            Calloc allocates n number of memory blocks with any amount of size
          */
-        char *lineBuffer = (char *)malloc(sizeof(char) * maxSize);
-        char **lineStorage = malloc(sizeof(char) * maxSize);
+        lineBuffer = (char *)malloc(maxSize);
+        lineStorage = malloc(maxSize);
 
         if(lineBuffer == NULL || lineStorage == NULL) {
                 fprintf(stderr, "Memory Not allocated\n");
                 exit(1);
         }
-
+        lineStorageSize = maxSize;
         // InOrder to create an array of Strings i need to allocate
         // memory for each index
         for(a = 0; a < maxSize; a++) {
-                lineStorage[a] = malloc(sizeof(char) * maxSize);
+                lineStorage[a] = malloc( maxSize);
                 if(lineStorage[a] == NULL) {
                         fprintf(stderr, "Memory Not allocated\n");
                         exit(1);
@@ -103,5 +105,7 @@ int readFile(char *fileName){
         // Closes the file
         fclose(fp);
         printf("End of ReadFile\n\n");
-        return binarySort(lineStorage,index);
+        int value = binarySort(lineStorage,index);
+
+        return value;
 }
