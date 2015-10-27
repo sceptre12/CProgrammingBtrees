@@ -1,3 +1,3 @@
 #!/bin/sh
 
-make clean; make run; ./compareStrings
+make clean; make all; ./build  test.txt

@@ -4,34 +4,25 @@
 int shouldBeCaseSensitive = 0;
 char *outputFile = NULL;
 char *inputFile = NULL;
+char *sortedList[];
 
 
 int main(int argc, char *argv[]){
 
+        int sortedLength,index;
+        // Parses the command Line to determine the function calls
+        // This will set global variables that will affect the determine
+        // read function
         parseCommandLineOptions(argc,argv);
-        determineRead(inputFile);
 
-        printf("%d\n", shouldBeCaseSensitive );
+        // Determines the read type, then goes into parsing the file,
+        // then goes into sorting the file, which returns its result
+        // as the size of the sortedList and also populates the sortedList
+        sortedLength = determineRead(inputFile);
 
-        if(outputFile != NULL) {
-                printf("Output File name %s\n", outputFile);
+        for(index = 0; index < sortedLength; index++ ) {
+            printf("Index: %d '%s'\n",index,sortedList[index] );
         }
-        if(inputFile != NULL) {
-                printf("Input File name %s", inputFile);
-        }
-
-        // shouldBeCaseSensitive = 0;
-        // char test1[] = "Yolo";
-        // char test2[] = "yolo";
-        // printf("The string %s\nThe first index %c\nThe first index in decimal %d\n", test1, test1[0],test1[0]);
-        // int length = stringLength(test1);
-        // printf("Length of Test1 %d\n",length);
-        //
-        // printf("%d\n", sameString(test1,test2,shouldBeCaseSensitive));
-        //
-        // printf("Is greater than %d\n", greaterThan("aiery", "athis one",shouldBeCaseSensitive));
-
-
 
         printf("\n");
         return 0;

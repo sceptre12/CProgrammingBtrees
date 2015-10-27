@@ -5,9 +5,12 @@
    and then outputs those values into a the
    binarytree creation function
  */
+
+//Determines the case type
 extern int shouldBeCaseSensitive;
 
-void readFile(char *fileName){
+
+int readFile(char *fileName){
         // filePath Location
         char path[254];
         if(getcwd(path, sizeof(path)) == NULL) {
@@ -54,10 +57,10 @@ void readFile(char *fileName){
         int count = 0, index = 0;
 
         /*
-          Streams through the file char by char
-          Creates a line from those chars
-          stores those lines in an array
-        */
+           Streams through the file char by char
+           Creates a line from those chars
+           stores those lines in an array
+         */
         while((ch = getc(fp)) != EOF) {
                 if((count >= changingSize -1) && (ch != '\n')) {
                         changingSize += maxSize;
@@ -67,7 +70,7 @@ void readFile(char *fileName){
                                 exit(1);
                         }
                 }
-                if(ch == '\n') {
+                if(ch == '\n' && count != 0) {
 
                         // Not Needed For now
 
@@ -82,8 +85,8 @@ void readFile(char *fileName){
                         // }
 
                         // Copies the lineBuffer String into a arrayStorage
-                        strcpy(lineStorage[index], lineBuffer);
 
+                        strcpy(lineStorage[index], lineBuffer);
                         index++;
                         for(a = 0; a < changingSize; a++) {
                                 lineBuffer[a] = '\0';
@@ -99,7 +102,6 @@ void readFile(char *fileName){
 
         // Closes the file
         fclose(fp);
-
-        binarySort(lineStorage,index);
         printf("End of ReadFile\n\n");
+        return binarySort(lineStorage,index);
 }

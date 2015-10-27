@@ -9,7 +9,6 @@ struct Node{
     char *currLine;
     int duplicate;
     struct Node *left;
-    struct Node *parent;
     struct Node *right;
 };
 
@@ -27,10 +26,11 @@ int greaterThan(char stringA[],char stringB[],int caseType);
 int parseCommandLineOptions(int argc, char *argv[]);
 
 //OpenFile Function
-void determineRead(char *fileName);
-void readFile(char *fileName);
-void readFromInput();
+int determineRead(char *fileName);
+int readFile(char *fileName);
+int readFromInput();
 
 //BinarySort
-void binarySort(char **array, int length);
+int binarySort(char **array, int length);
 int insertNode(struct Node *root,char *line);
+void printInOrder(struct Node *root);

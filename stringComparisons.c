@@ -25,6 +25,7 @@ void toLowerCase(char *word, int count){
 /*
    Returns 1 if true or 0 if false
  */
+
 int sameString(char stringA[], char stringB[], int caseType){
         /*
            Case type will determine if method should be ran with
@@ -32,17 +33,20 @@ int sameString(char stringA[], char stringB[], int caseType){
            1 = true
            0 = false
          */
+        // printf("\t a:%s | b:%s type:%d\n",stringA,stringB,caseType);
         int lengthA = stringLength(stringA);
         int lengthB = stringLength(stringB);
         if(lengthA != lengthB) return 0;
 
         // Creates temporary placeholders
         char tempA[lengthA], tempB[lengthB];
+
         strcpy(tempA,stringA);
         strcpy(tempB,stringB);
         int size = 0;
         // Does not check for case
         if(caseType == 0) {
+          // printf("\tDoes not check for case\n");
                 toUpperCase(tempA, lengthA);
                 toUpperCase(tempB, lengthA);
                 for(size = 0; size < lengthA; size++) {
@@ -55,9 +59,11 @@ int sameString(char stringA[], char stringB[], int caseType){
         // Case checking matters
         for(size = 0; size < lengthA; size++) {
                 if(tempA[size] != tempB[size]) {
+                  // printf("\tTEst\n");
                         return 0;
                 }
         }
+
         return 1;
 }
 
@@ -100,6 +106,7 @@ int greaterThan(char stringA[],char stringB[],int caseType){
                                 }
                         }
                 }else {
+                    printf("Inside of String comparison Less Than\n");
                         for(count = 0; count < lengthA; count++) {
                                 if(tempA[count] != tempB[count]) {
                                         if(tempA[count] > tempB[count]) {

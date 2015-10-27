@@ -1,9 +1,9 @@
 #include "header.h"
 
-void determineRead(char *fileName){
+int determineRead(char *fileName){
         if(fileName != NULL) {
-          readFile(fileName);
+                return readFile(fileName);
         }else{
-          readFromInput();
+                return readFromInput();
         }
 }
