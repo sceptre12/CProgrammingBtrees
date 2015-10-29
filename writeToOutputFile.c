@@ -1,7 +1,7 @@
 #include "header.h"
 
 void writeToOutputFile(char *fileName){
-        printf("Inside of writeToOutputFile function\n");
+        // printf("Inside of writeToOutputFile function\n");
         // get current Directory
         char path[1024];
         if(getcwd(path,sizeof(path)) == NULL) {

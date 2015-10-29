@@ -47,7 +47,7 @@ void readFile(char *fileName,int caseType){
                     char *temp = (char *)malloc(sizeof(char));
                     lineBuffer[count] = '\0';
                     strcpy(temp,lineBuffer);
-                    printf("First Output '%s'\n", temp);
+                    // printf("First Output '%s'\n", temp);
                     root.currLine = temp;
 
                     initalizeRoot++;
@@ -56,8 +56,8 @@ void readFile(char *fileName,int caseType){
                         // Copies the lineBuffer String into a arrayStorage
                         char *temp = (char *)malloc(sizeof(char));
                         lineBuffer[count] = '\0';
-                        printf("Output '%s'\n", lineBuffer);
-                        printf("In the root Node '%s'\n", root.currLine);
+                        // printf("Output '%s'\n", lineBuffer);
+                        // printf("In the root Node '%s'\n", root.currLine);
                         strcpy(temp, lineBuffer);
                         insertNode(&root,temp,caseType);
                         count = 0;
@@ -70,6 +70,6 @@ void readFile(char *fileName,int caseType){
 
         // Closes the file
         fclose(fp);
-        printf("End of ReadFile\n\n");
+        // printf("End of ReadFile\n\n");
         // int value = binarySort(lineStorage,index);
 }
