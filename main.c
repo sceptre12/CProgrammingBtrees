@@ -1,39 +1,28 @@
 #include "header.h"
 
-/*
-  Xavier Thomas
-  Section U01
-  I affirm that this program is entirely my own work and none of it is the work of any other person.
-*/
-//Global Declerations
-int shouldBeCaseSensitive = 0;
-char *outputFile = NULL;
-char *inputFile = NULL;
-char *sortedList[];
-
-// manually allocated memory
-char *lineBuffer;
-char **lineStorage;
-int lineStorageSize;
-
 int main(int argc, char *argv[]){
+    printf("Welcome To assignment 1\n");
 
-        int sortedLength,index;
-        // Parses the command Line to determine the function calls
-        // This will set global variables that will affect the determine
-        // read function
-        parseCommandLineOptions(argc,argv);
+    int caseSensitive = 0;
+    char *outputFile = NULL;
+    char *inputFile = NULL;
+    parseCommandLineOptions(argc,argv,&caseSensitive,&outputFile,&inputFile);
 
-        // Determines the read type, then goes into parsing the file,
-        // then goes into sorting the file, which returns its result
-        // as the size of the sortedList and also populates the sortedList
-        sortedLength = determineRead(inputFile);
+    printf("Case '%d' , outputFile '%s' inputfile '%s'\n",caseSensitive,outputFile,inputFile);
 
-        //Determines the output type and then writes to the appropriate
-        // source
-        determineOutput(outputFile, sortedLength);
+    int readType = determineRead(inputFile);
 
+    printf("Read Type '%d'\n", readType);
 
-        printf("\n");
-        return 0;
+    if(readType){
+        readFile(inputFile,caseSensitive);
+    }else{
+        readFromInput(caseSensitive);
+    }
+
+    determineOutput(outputFile);
+
+    printPostOrder(&root);
+    printf("End Of Assingment\n");
+    return 0;
 }

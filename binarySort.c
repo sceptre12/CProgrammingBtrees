@@ -1,48 +1,14 @@
 #include "header.h"
 
-//Determines the case
-extern int shouldBeCaseSensitive;
-
-// Stores sorted list of input
-extern char *sortedList[];
-
-// TODO: Place the creation of a struct in a function
-
-int binarySort(char **array, int length){
-        // printf("\tEntering Binary Sort\n");
-
-        // creates root Node
-        struct Node root;
-        root.currLine = array[0];
-        root.left = NULL;
-        root.right = NULL;
-        root.duplicate = 0;
-
-        // Outputs String Array
-
-        // struct Node *start = &root;
-        //Creating binary Tree
-        int a;
-        for(a = 1; a < length; a++) {
-                insertNode(&root,array[a]);
-        }
-        // Prints out the sorted values from the tree
-        printInOrder(&root);
-        // printf("\tLeaving Binary Sort\n");
-        return length;
-}
-
-int insertNode(struct Node *root, char *stringB){
+int insertNode(struct Node *root, char *stringB, int caseSensitive){
         // printf("Entering Insert Node Function\n");
-        // printf("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-        // printf("Current string being inserted CaseType: %d\nString A: '%s'\nString B: '%s'\n\n", shouldBeCaseSensitive, root->currLine,stringB);
+        // printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        // printf("Current string being inserted CaseType: %d\nString A: '%s'\nString B: '%s'\n\n", caseSensitive, root->currLine,stringB);
         // printf("Duplicate number '%d'\n", root->duplicate);
         //check if same
-        int checkIfSame = sameString(root->currLine,stringB,shouldBeCaseSensitive);
+        int checkIfSame = sameString(root->currLine,stringB,caseSensitive);
         //check if greaterThan
-        // int greaterThanResult = greaterThan(stringB,root->currLine,shouldBeCaseSensitive);
-
-        int greaterThanResult = greaterThan(root->currLine,stringB,shouldBeCaseSensitive);
+        int greaterThanResult = greaterThan(root->currLine,stringB,caseSensitive);
 
         // printf("\t same: '%d' , greaterThan: '%d'\n", checkIfSame, greaterThanResult);
 
@@ -50,7 +16,7 @@ int insertNode(struct Node *root, char *stringB){
 
                 root->duplicate++;
                 // printf("Duplicate number '%d'\n", root->duplicate);
-                printf("Leaving Insert Node Function\n");
+                // printf("Leaving Insert Node Function\n");
                 return 0; // success
         }
 
@@ -59,7 +25,7 @@ int insertNode(struct Node *root, char *stringB){
                 // Means That String B is less than the value inside of root->currLine
                 if(root->left != NULL) {
                         // printf("\n\tLEFT CONTAINS '%s'\n", root->left->currLine);
-                        insertNode(root->left, stringB);
+                        insertNode(root->left, stringB, caseSensitive);
                         // printf("\tLEFT IS NOT NULL\n");
                 }else{
                         // printf("\tLEFT IS NULL\n");
@@ -78,7 +44,7 @@ int insertNode(struct Node *root, char *stringB){
                 // printf("String B is Greater than String A\n");
                 if(root->right != NULL) {
                         // printf("\n\tRIGHT CONTAINS '%s'\n", root->right->currLine);
-                        insertNode(root->right, stringB);
+                        insertNode(root->right, stringB, caseSensitive);
                         // printf("\tRIGHT IS NOT NULL\n");
                 }else{
                         // printf("\tRIGHT IS NULL\n");
@@ -108,22 +74,41 @@ int insertNode(struct Node *root, char *stringB){
         return 0;
 }
 
-void printInOrder(struct Node *root){
+void printInOrder(struct Node *root,FILE *fp){
         // printf("\nEntering printOrder Function\n");
         // This is only initialized once
         static int index = 0;
         if(root != NULL) {
-
                 // printf("Printing Out left\n");
-                printInOrder(root->left);
+                printInOrder(root->left,fp);
 
-                char *someString = root->currLine;                
+                // char *someString = root->currLine;
                 // stores the values inside of this global array
+                if(fp != NULL) {
+                        fprintf(fp, "%s\n", root->currLine);
+                }else{
+                        printf("Index '%d' value'%s'\n", index, root->currLine);
+                }
 
-                sortedList[index] = someString;
                 index++;
                 // printf("Printing out right\n");
-                printInOrder(root->right);
+                printInOrder(root->right,fp);
+        }
+        // printf("\nLeaving printOrder function\n");
+}
+void printPostOrder(struct Node *root){
+        // printf("\nEntering printOrder Function\n");
+        // This is only initialized once
+        static int index = 0;
+        if(root != NULL) {
+                // printf("Printing Out left\n");
+                printPostOrder(root->left);
+
+
+                // printf("Printing out right\n");
+                printPostOrder(root->right);
+                free(root->currLine);
+                index++;
         }
         // printf("\nLeaving printOrder function\n");
 }

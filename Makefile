@@ -3,36 +3,29 @@ CFLAG=-Wall -g
 
 all: build bin
 
-#	Creates the executable file build
-build: main.o stringCompare.o parseCommandLine.o determineRead.o read.o binary.o determineOutput.o write.o
-	$(CC) $(CFLAG) -o build main.o stringComparisons.o parseCommandLineOptions.o determineRead.o readFile.o readFromInput.o binarySort.o determineOutput.o writeToOutputFile.o writeToScreen.o
+build: main.o parseCommandLine.o determineRead.o stringComparisons.o binarySort.o determineOutput.o
+	$(CC) $(CFLAG) -o build main.o parseCommandLineOptions.o determineRead.o readFile.o readFromInput.o stringComparisons.o binarySort.o determineOutput.o writeToOutputFile.o writeToScreen.o
 
 main.o: main.c header.h
 	$(CC) $(CFLAG) -c main.c
 
-stringCompare.o: stringComparisons.c header.h
-	$(CC) $(CFLAG) -c stringComparisons.c
-
 parseCommandLine.o: parseCommandLineOptions.c header.h
-	$(CC) $(CFLAG) -c parseCommandLineOptions.c 
+	$(CC) $(CFLAG) -c parseCommandLineOptions.c
 
-determineRead.o: determineRead.c header.h
-	$(CC) $(CFLAG) -c determineRead.c
+determineRead.o: determineRead.c readFile.c readFromInput.c header.h
+	$(CC) $(CFLAG) -c determineRead.c readFile.c readFromInput.c
 
-read.o:  readFromInput.c readFile.c header.h
-	$(CC) $(CFLAG) -c readFile.c readFromInput.c
+stringComparisons.o: stringComparisons.c header.h
+	$(CC) $(CFLAG) -c stringComparisons.c 
 
-binary.o: binarySort.c header.h
+binarySort.o: binarySort.c header.h
 	$(CC) $(CFLAG) -c binarySort.c
 
-determineOutput.o: determineOutput.c header.h
-	$(CC) $(CFLAG) -c determineOutput.c
-
-write.o: writeToOutputFile.c writeToScreen.c header.h
-	$(CC) $(CFLAG) -c writeToOutputFile.c writeToScreen.c
-
+determineOutput.o: determineOutput.c writeToOutputFile.c writeToScreen.c header.h
+	$(CC) $(CFLAG) -c determineOutput.c writeToOutputFile.c writeToScreen.c
 bin: 
 	mkdir bin
 	mv *.o bin/
-clean: 
+
+clean:
 	rm -rf *.o bin build

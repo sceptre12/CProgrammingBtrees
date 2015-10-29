@@ -1,8 +1,9 @@
 #include "header.h"
 
-void determineOutput(char *fileName, int sortedListSize){
+void determineOutput(char *fileName){
         if(fileName != NULL) {
-                writeToOutputFile(fileName,sortedListSize);
-        }
-        writeToScreen(sortedListSize);
+                writeToOutputFile(fileName);
+        }else{
+            writeToScreen();
+        }        
 }

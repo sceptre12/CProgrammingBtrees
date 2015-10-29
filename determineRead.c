@@ -1,9 +1,9 @@
 #include "header.h"
 
+// Returns 1 if true and 0 if false
 int determineRead(char *fileName){
         if(fileName != NULL) {
-                return readFile(fileName);
-        }else{
-                return readFromInput();
+            return 1;
         }
+        return 0;
 }

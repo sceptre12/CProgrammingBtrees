@@ -6,13 +6,9 @@
    binarytree creation function
  */
 
-//Determines the case type
-extern int shouldBeCaseSensitive;
-extern char *lineBuffer;
-extern char **lineStorage;
-extern int lineStorageSize;
 
-int readFile(char *fileName){
+
+void readFile(char *fileName,int caseType){
         // filePath Location
         char path[254];
         if(getcwd(path, sizeof(path)) == NULL) {
@@ -30,33 +26,15 @@ int readFile(char *fileName){
                 fprintf(stderr, "File Not Found '-%s'\n", path);
                 exit(1);
         }
+        root.left = NULL;
+        root.right = NULL;
+        root.duplicate = 0;
 
-        int maxSize = 128, changingSize = maxSize,a = 0;
-
-        /*
-           Malloc allocates a memory block of a specific size
-           Calloc allocates n number of memory blocks with any amount of size
-         */
-        lineBuffer = (char *)malloc(maxSize);
-        lineStorage = malloc(maxSize);
-
-        if(lineBuffer == NULL || lineStorage == NULL) {
-                fprintf(stderr, "Memory Not allocated\n");
-                exit(1);
-        }
-        lineStorageSize = maxSize;
-        // InOrder to create an array of Strings i need to allocate
-        // memory for each index
-        for(a = 0; a < maxSize; a++) {
-                lineStorage[a] = malloc( maxSize);
-                if(lineStorage[a] == NULL) {
-                        fprintf(stderr, "Memory Not allocated\n");
-                        exit(1);
-                }
-        }
+        char lineBuffer[254];
 
         char ch = NULL;
-        int count = 0, index = 0;
+        int count = 0;
+        int initalizeRoot = 0;
 
         /*
            Streams through the file char by char
@@ -64,36 +42,24 @@ int readFile(char *fileName){
            stores those lines in an array
          */
         while((ch = getc(fp)) != EOF) {
-                if((count >= changingSize -1) && (ch != '\n')) {
-                        changingSize += maxSize;
-                        lineBuffer = (char *)realloc(lineBuffer, changingSize);
-                        if(lineBuffer == NULL) {
-                                fprintf(stderr, "Memory Not reallocated 1\n");
-                                exit(1);
-                        }
-                }
-                if(ch == '\n' && count != 0) {
+                if((initalizeRoot == 0) && (ch == '\n') && (count != 0)){
+                    // This should only be printed once
+                    char *temp = (char *)malloc(sizeof(char));
+                    lineBuffer[count] = '\0';
+                    strcpy(temp,lineBuffer);
+                    printf("First Output '%s'\n", temp);
+                    root.currLine = temp;
 
-                        // Not Needed For now
-
-                        // a = 0;
-                        // for(a = 0; a < maxSize; a++){
-                        //   printf("%d", a);
-                        //   lineStorage[a] = (char *)realloc(lineStorage[a], changingSize);
-                        //   if(lineStorage[a] == NULL) {
-                        //           fprintf(stderr, "Memory Not allocated\n");
-                        //           exit(1);
-                        //   }
-                        // }
-
+                    initalizeRoot++;
+                    count= 0;
+                }else if(ch == '\n' && count != 0 && initalizeRoot > 0) {
                         // Copies the lineBuffer String into a arrayStorage
-
-                        strcpy(lineStorage[index], lineBuffer);
-                        index++;
-                        for(a = 0; a < changingSize; a++) {
-                                lineBuffer[a] = '\0';
-                        }
-
+                        char *temp = (char *)malloc(sizeof(char));
+                        lineBuffer[count] = '\0';
+                        printf("Output '%s'\n", lineBuffer);
+                        printf("In the root Node '%s'\n", root.currLine);
+                        strcpy(temp, lineBuffer);
+                        insertNode(&root,temp,caseType);
                         count = 0;
                 }
                 if(ch != '\n') {
@@ -105,7 +71,5 @@ int readFile(char *fileName){
         // Closes the file
         fclose(fp);
         printf("End of ReadFile\n\n");
-        int value = binarySort(lineStorage,index);
-
-        return value;
+        // int value = binarySort(lineStorage,index);
 }

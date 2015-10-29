@@ -1,13 +1,8 @@
 #include "header.h"
 
-
-extern int shouldBeCaseSensitive;
-extern char *outputFile;
-extern char *inputFile;
-int parseCommandLineOptions(int argc, char *argv[]){
+void parseCommandLineOptions(int argc, char *argv[],int *caseSensitive,char **outputFile,char **inputFile){
 
         int c;
-
         /*
            opterr: If the value of this variable is nonzero then getopts prints an error message
                   to the standard error stream if it encounters an unkown option character or an
@@ -20,14 +15,14 @@ int parseCommandLineOptions(int argc, char *argv[]){
         while((c = getopt(argc,argv, "co:")) != -1) {
                 switch(c) {
                 case 'c':
-                        shouldBeCaseSensitive = 1;
+                        *caseSensitive = 1;
                         break;
                 case 'o':
                         /*
                            optarg: This variable is set by getopt to point at the value of the
                            option argument, for those that accept arguments
                          */
-                        outputFile = optarg;
+                        *outputFile = optarg;
                         break;
                 case '?':
                         /*
@@ -46,7 +41,7 @@ int parseCommandLineOptions(int argc, char *argv[]){
                                 // %x prints out hex
                                 fprintf(stderr, "Unkown Option character '\\x%x'\n", optopt);
 
-                        return 1;
+                        exit(1);
                 default:
                         abort();
                 }
@@ -57,9 +52,8 @@ int parseCommandLineOptions(int argc, char *argv[]){
                   to be processed. Once getopts has found all the option arguments
                   this can be used to determien where all the non-opion arguments begin.
          */
-        inputFile = argv[optind];
+        *inputFile = argv[optind];
         // for(index = optind; index < argc; index++) {
         //         printf("Non-option argument %s\n\n", argv[index]);
         // }
-        return 0;
 }

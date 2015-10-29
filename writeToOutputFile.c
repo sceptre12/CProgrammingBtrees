@@ -1,11 +1,7 @@
 #include "header.h"
 
-extern char *sortedList[];
-void writeToOutputFile(char *fileName,int sortedListSize){
+void writeToOutputFile(char *fileName){
         printf("Inside of writeToOutputFile function\n");
-
-
-
         // get current Directory
         char path[1024];
         if(getcwd(path,sizeof(path)) == NULL) {
@@ -23,12 +19,8 @@ void writeToOutputFile(char *fileName,int sortedListSize){
                 fprintf(stderr, "File Not Found '-%s'\n", path);
                 exit(1);
         }
-        int a;
-        for (a = 0; a < sortedListSize; a++) {
-            fprintf(fp, "%s\n", sortedList[a]);
-        }
+        printInOrder(&root,fp);
+
         fprintf(fp, "\n");
         fclose(fp);
-
-        printf("End of writeToOutputFile function\n");
 }

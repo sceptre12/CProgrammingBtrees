@@ -10,7 +10,7 @@ struct Node {
         int duplicate;
         struct Node *left;
         struct Node *right;
-};
+} root;
 
 
 //##########Function Declarations
@@ -23,19 +23,18 @@ int stringLength(char *word);
 int greaterThan(char stringA[],char stringB[],int caseType);
 
 //Command Line Function
-int parseCommandLineOptions(int argc, char *argv[]);
+void parseCommandLineOptions(int argc, char *argv[],int *caseSensitive,char **outputFile,char **inputFile);
 
 //OpenFile Function
 int determineRead(char *fileName);
-int readFile(char *fileName);
-int readFromInput();
-
+void readFile(char *fileName, int caseSensitive);
+void readFromInput(int caseSensitive);
 //WriteFile Function
-void determineOutput(char *fileName, int sortedListSize);
-void writeToOutputFile(char *fileName, int sortedListSize);
-void writeToScreen(int sortedListSize);
+void determineOutput(char *fileName);
+void writeToOutputFile(char *fileName);
+void writeToScreen();
 
 //BinarySort
-int binarySort(char **array, int length);
-int insertNode(struct Node *root,char *line);
-void printInOrder(struct Node *root);
+int insertNode(struct Node *root,char *line, int caseSensitive);
+void printInOrder(struct Node *root,FILE *fp);
+void printPostOrder(struct Node *root);
