@@ -1,5 +1,9 @@
 #include "header.h"
-
+/*
+  Xavier Thomas
+  Section U01
+  I affirm that this program is entirely my own work and none of it is the work of any other person.
+*/
 int main(int argc, char *argv[]){
     printf("Welcome To assignment 1\n");
 
