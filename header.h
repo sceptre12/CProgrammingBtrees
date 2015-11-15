@@ -10,7 +10,13 @@ struct Node {
         int duplicate;
         struct Node *left;
         struct Node *right;
+        struct List *list;
 } root;
+
+struct List {
+    struct List *next;
+    char *currLine;
+};
 
 
 //##########Function Declarations
@@ -38,3 +44,4 @@ void writeToScreen();
 int insertNode(struct Node *root,char *line, int caseSensitive);
 void printInOrder(struct Node *root,FILE *fp);
 void printPostOrder(struct Node *root);
+int printLinkedList(FILE *fp, struct Node *root);

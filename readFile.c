@@ -30,7 +30,7 @@ void readFile(char *fileName,int caseType){
         root.right = NULL;
         root.duplicate = 0;
 
-        char lineBuffer[254];
+        char lineBuffer[1024];
 
         char ch = NULL;
         int count = 0;

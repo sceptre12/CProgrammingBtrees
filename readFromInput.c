@@ -9,6 +9,7 @@ void readFromInput(int caseSensitive){
         //Creates root node
         root.left = NULL;
         root.right = NULL;
+        root.list = NULL;
         root.duplicate = 0;
 
         int end = 0;
