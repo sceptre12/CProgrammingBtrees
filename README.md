@@ -1,4 +1,4 @@
-#Major Assignment #1: Sorting with Binary Search Tree
+#Major Assignment #1: Sorting with Binary Search Tree (Programming Assignment)
 
 This assignment asks you to sort the lines of an input file (or from standard input) and print the sorted lines to an output file (or standard output). Your program, called bstsort (binary search tree sort), will take the following command line arguments:
 
